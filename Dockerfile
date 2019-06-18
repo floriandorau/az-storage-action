@@ -1,20 +1,17 @@
 FROM maven:3.6.0-slim
 
-LABEL "com.github.actions.name"="nexus-deploy-action"
-LABEL "com.github.actions.description"="Deploy artifacts to Nexus using Maven deploy plugin"
+LABEL "com.github.actions.name"="az-storage-action"
+LABEL "com.github.actions.description"="Handle Azure storage using Github actions"
 LABEL "com.github.actions.icon"="box"
 LABEL "com.github.actions.color"="blue"
 
-LABEL "repository"="https://github.com/floriandorau/nexus-deploy-action"
+LABEL "repository"="https://github.com/floriandorau/az-storage-action"
 LABEL "maintainer"="Florian Dorau <fdorau@it-economics.de>"
 
-RUN apt-get update && \
-    apt-get install -y zip jq
+COPY . .
 
-RUN mkdir /project
+RUN npm install --production
 
-COPY settings.xml /project
-
-COPY entrypoint.sh /entrypoint.sh
+ADD entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]

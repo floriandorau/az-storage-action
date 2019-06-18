@@ -1,0 +1,25 @@
+{
+  "name": "az-storage-action",
+  "version": "1.0.0",
+  "description": "Handle Azure storage using Github actions",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/floriandorau/az-storage-action.git"
+  },
+  "author": "floriandorau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/floriandorau/az-storage-action/issues"
+  },
+  "homepage": "https://github.com/floriandorau/az-storage-action#readme",
+  "dependencies": {
+    "@azure/storage-blob": "10.3.0"
+  }
+}

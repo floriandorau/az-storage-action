@@ -1,19 +1,21 @@
-# nexus-deploy-action #
+# az-storage-action #
 
-Github action to deploy artifacts to Nexus using Maven deploy plugin.
+Github action to upload blob files to an Azure storage account.
+
+**Note:** Project is still in progress. Readme might not be correct!
 
 ## Usage ##
 
-Register the _nexus-deploy-action_ in your `.github/main.workflow` according to the following.
+Register the _az-storage-action_ in your `.github/main.workflow` according to the following.
 
 ```bash
-workflow "Deploy to nexus" {
+workflow "Upload to Azure storage" {
   on = "push"
-  resolves = ["nexus-deploy"]
+  resolves = ["blob-upload"]
 }
 
-action "nexus-deploy" {
-  uses = "floriandorau/nexus-deploy-action@master"
+action "blob-upload" {
+  uses = "floriandorau/az-storage-action@master"
   secrets = ["GITHUB_TOKEN"]
 }
 ```
@@ -22,24 +24,18 @@ action "nexus-deploy" {
 
 In order to run the deployment, the action requires the following variables provided via the enviroment.
 
-### Nexus variables ###
+### Azure storage variables ###
 
-| Option      | Description
-| ----------- | ---------------------------------------
-| NEXUS       | Nexus base url
-| NEXUS_USER  | User of the Nexus
-| NEXUS_PW    | Password of the Nexus user
+| Option                | Description
+| -------------------- | ---------------------------------------
+| AZ_STORAGE_ACCOUNT   | Name of the Azure storage account
+| AZ_STORAGE_TOKEN     | Access token of the storage account
+| AZ_STORAGE_CONTAINER | Name of the container where the file should be uploaded
 
-### Maven variables ###
+### Blob file variables ###
 
-| Option        | Description
-| -----------   | ---------------------------------------
-| GROUP_ID      | Maven group id
-| ARTIFACT_ID   | Maven artifact id
-| REPOSITORY_ID | Maven repository id
-| VERSION       | Version of the artifact
-| ARTIFACT      | Name/path of the artifact to deploy
-
-## Note ##
-
-The `version` option is not working properly at the moment. The action will try to parse it from `package.json` file. Therefore the action will work with Node-based applications only!
+| Option    | Description
+| --------- | ---------------------------------------
+| BLOB_NAME | Desired name of the blob
+| VERSION   | Version of the uploaded blob
+| FILE_PATH | Path of the file to be uploaded.
