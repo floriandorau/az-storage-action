@@ -1,4 +1,4 @@
-FROM maven:3.6.0-slim
+FROM node:12.6.0-alpine
 
 LABEL "com.github.actions.name"="az-storage-action"
 LABEL "com.github.actions.description"="Handle Azure storage using Github actions"
@@ -10,7 +10,7 @@ LABEL "maintainer"="Florian Dorau <fdorau@it-economics.de>"
 
 COPY . .
 
-RUN npm install --production
+RUN yarn install --production=true
 
 ADD entrypoint.sh /entrypoint.sh
 
