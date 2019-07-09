@@ -2,4 +2,4 @@
 
 set -eu
 
-node /bin/azstorage.js "$@"
+sh -c "node /bin/azstorage.js $*"
