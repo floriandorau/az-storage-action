@@ -5,8 +5,19 @@ const { ErrorWithExitCode } = require('../lib/errors');
 
 const package = require('../package.json');
 
+const parseArgs = (argv)=> {
+    const versionArg = argv[2];
+    if(!versionArg) {
+        return {};
+    }
+
+    const splittedArg = versionArg.split("=");
+    return {[splittedArg[0]]: splittedArg[1]};    
+}
+
 const main = () => {
-    run()
+    const args = parseArgs(process.argv);
+    run(args)
         .then(pr => {
             process.exitCode = 0;
         })
