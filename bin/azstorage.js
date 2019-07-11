@@ -6,18 +6,25 @@ const { ErrorWithExitCode } = require('../lib/errors');
 const package = require('../package.json');
 
 const parseArgs = (argv)=> {
-    const versionArg = argv[2];
-    if(!versionArg) {
+    const [node, programm, ...args] = argv;
+    console.log(node, programm, args)
+    if(!args) {
+        console.log('no args specified')
         return {};
     }
 
-    const splittedArg = versionArg.split("=");
-    return {[splittedArg[0]]: splittedArg[1]};    
+    const options = {};
+    args.forEach(arg => {
+        const splittedArg = arg.split("=");
+        options[splittedArg[0]]=splittedArg[1];
+    });
+
+    return options; 
 }
 
 const main = () => {
-    const args = parseArgs(process.argv);
-    run(args)
+    const options = parseArgs(process.argv);
+    run(options)
         .then(pr => {
             process.exitCode = 0;
         })
