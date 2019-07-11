@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 
 const { run } = require('../lib');
-const { ErrorWithExitCode } = require('../lib/errors');
+const { ErrorWithExitCode } = require('../lib/utils/errors');
 
 const package = require('../package.json');
 
 const parseArgs = (argv)=> {
     const [node, programm, ...args] = argv;
-    console.log(node, programm, args)
+    
     if(!args) {
         console.log('no args specified')
         return {};
@@ -15,7 +15,7 @@ const parseArgs = (argv)=> {
 
     const options = {};
     args.forEach(arg => {
-        const splittedArg = arg.split("=");
+        const splittedArg = arg.split('=');
         options[splittedArg[0]]=splittedArg[1];
     });
 
